@@ -1,0 +1,193 @@
+
+body{
+    font-family: Arial;
+    margin:10%;
+    text-align: "center";
+  }
+  .video-styling{
+    display: grid;
+    grid-template-columns: 20% 10% video 10% 20%;
+  }
+  .background{ 
+    margin: 0;
+    background-size: cover;
+    background-image: linear-gradient(to bottom right, white, grey);
+  }
+  .content{
+    background: none;
+  }
+  nav{
+    top:0;
+    text-align: center;
+    background: orangered;
+    position: fixed;
+    width: 100%;
+    z-index:10;
+    font-family: "Verdana", sans-serif;
+  }
+  .shop_item{
+    text-align: center;
+  }
+  
+  img.shop_image{
+    vertical-align: center;
+    text-align: center;
+    padding: 0px 3%;
+    max-width: 20%;
+    max-height: 400px;
+    min-height: 240px;
+  }
+  
+  .collage{
+    text-align: center;
+    
+    
+  }
+  
+  img.collage{
+    text-align: left;
+    max-width: 20%;
+    max-height: 20%;
+  }
+  
+  .video-wrapper {
+    padding-bottom: 20px; /* 16:9 */ 
+    padding-top: 25px;
+    text-align: center;
+  }
+  .video{
+    text-align: center;
+    grid-area: video;
+  }
+  /* .video-Wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  } */
+  
+  /* ul a{
+    color:orangered;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px 10px;
+  } */
+  /* .video{
+    display: block;
+    text-align: center;
+    
+  } */
+  .grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    /* grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 10% 10%; */
+    /*grid-template-areas:
+    "header header header header"
+    "sidebar search search search"
+    "sidebar main main ."
+    "footer footer footer footer"
+    */
+    color: white;
+  
+  }
+  
+  
+  
+  .cell{
+    background: blue;
+    text-align: center;
+    font-size: 40px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 10% 10%; 
+    margin: 10% 10%;
+    /* grid-column: 1/4; */
+  }
+  
+  .logo{
+    background-image: url("background.png");
+    padding: 5%;
+    color: white;
+    vertical-align:  middle;
+    text-align: center;
+  }
+  
+  
+  footer{
+    text-align: center;
+    color: black;
+  }
+  
+  /*  SEARCH INPUT 
+  ===========================================*/
+  /* * {
+    box-sizing: border-box;
+  
+  } */
+  form{
+    padding-top: 5%;
+  }
+  
+  form.home-search input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: center;
+    width: 40%;
+    background: white;
+  
+  }
+  
+  form.home-search button {
+    float: center;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+  
+  form.example button:hover {
+    background: #0b7dda;
+  }
+  
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  
+  .sub-item:hover, .grid-item:hover {
+    background-color:green(180, 34, 34);
+    opacity: 0.2;
+  }
+  
+  
+  /*
+  ====================================================
+  h1, h2{
+    color: #555;
+  }
+  a{
+    color:green;
+  }
+  p{
+    background: #666;
+    color:white;
+    padding: 20px 30px; //2 values --> top/bottom left/right
+    //padding: 4 values--> Top Right Bottom Left;
+  }
+  
+  fix spacing in top
+  input a home label/ welcome symbol
+  put actual array of items
+  
+  
+  */
+  
