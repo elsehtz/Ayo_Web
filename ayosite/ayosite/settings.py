@@ -37,7 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'website',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,15 +82,12 @@ WSGI_APPLICATION = 'ayosite.wsgi.application'
 
 DATABASES = {
     'default': {
-    
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        #'ENGINE': 'django.db.backends.postgresql',
-        #'USER' : '',
-        #'PASSWORD' : '', 
-        #'HOST' : '',
-        #'PORT' : '5432'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ayo_website_db',
+        'USER' : 'postgres',
+        'PASSWORD' : 'EkkoSwain7', 
+        'HOST' : 'Localhost',
+        'PORT' : '5432'
         
     }
 }
@@ -134,3 +138,10 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+#AUTH
+
+AUTHENTICATION_BACKENDS = (    
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
