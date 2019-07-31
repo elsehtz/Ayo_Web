@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'website.apps.WebsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'website',
+    'django.contrib.staticfiles', 
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -132,9 +132,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'website/templates'),
-    os.path.join(BASE_DIR,'website/templates/html'),
-    os.path.join(BASE_DIR,'templates')
+    os.path.join(BASE_DIR,'external_static'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')

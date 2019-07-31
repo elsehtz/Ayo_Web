@@ -15,9 +15,26 @@ def home(request):
     #return render(request, 'web_practice_1.html', dynamic_dict)
     return render(request, 'web_practice_1.html', {'dest_1':my_name})
 
+
 def shop(request):
-    return 
+    return render(request, 'checkout-page.html')
+
+
 def room(request):
+    return render(request, 'room.html', {'product_list':range(0,5)})
+
+
+def signin(request):
     return
+
+
 def contact(request):
-    return
+    return render(request, 'home.html')
+
+# Actions
+
+def add(request):
+    val_1 = request.POST['num_1']
+    val_2 = request.POST['num_2']
+    res = int(val_1) + int(val_2)
+    return render(request, 'result.html', {'result':res})

@@ -6,7 +6,7 @@ body{
   }
   .boxy{
     color: black;
-    background: cyan;
+    background: black;
     padding: 20px;
   }
   a{
@@ -27,9 +27,8 @@ body{
   }
   nav{
     top:0;
-    color: hotpink;
     text-align: center;
-    background: green;
+    background: orangered;
     position: fixed;
     width: 100%;
     z-index:10;

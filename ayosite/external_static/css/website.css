@@ -1,0 +1,130 @@
+
+html{
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(to bottom right, white, grey) !important;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;  
+  /* font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%; */
+  
+}
+body{
+    font-family: Arial;
+    text-align: "center";
+  }
+  .boxy{
+    color: black;
+    background: black;
+    padding: 20px;
+  }
+
+  .video-styling{
+    display: grid;
+    grid-template-columns: 20% 10% video 10% 20%;
+  }
+  .home-search{
+    display: inline;
+    text-align: right;
+    padding-left: 30%;
+  }
+  .content{
+    background: none;
+  }
+  .shop_item{
+    text-align: center;
+  }  
+  .main-content{
+    padding: 0px 100px;
+  }
+  nav{
+    padding: 20px 0;
+    top:0;
+    text-align: center;
+    width: 100%;
+    background: orangered;
+    position: fixed;
+    z-index:10;
+  }
+  a:link {
+    margin: 0 10px;
+    color: black;
+    text-decoration: none;
+    font-size: 130%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  a:hover {
+    opacity: .5;
+  }
+  a:visited {
+    color: black;
+  }
+  .profile{
+    text-align: end;
+    display: inline;
+    padding: 20px;
+  }
+  .profile:hover{
+    background: white;
+    opacity: .5;
+  }
+  img.shop_image{
+    vertical-align: center;
+    text-align: center;
+    padding: 0px 3%;
+    max-width: 20%;
+    max-height: 400px;
+    min-height: 240px;
+  }
+  
+  .collage{
+    text-align: center;
+  }
+  
+  img.collage{
+    text-align: left;
+    max-width: 20%;
+    max-height: 20%;
+  }
+  
+  .video-wrapper {
+    padding-bottom: 20px; /* 16:9 */ 
+    padding-top: 25px;
+    text-align: center;
+  }
+  .video{
+    text-align: center;
+    grid-area: video;
+  }
+
+  .grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+
+  }
+  
+  .cell{
+    background: blue;
+    text-align: center;
+    font-size: 40px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 10% 10%; 
+    margin: 10% 10%;
+    /* grid-column: 1/4; */
+  }
+  
+  .logo{
+    vertical-align:  middle;
+    text-align: center;
+  }
+  
+  
+  footer{
+    text-align: center;
+    color: black;
+  }
+  

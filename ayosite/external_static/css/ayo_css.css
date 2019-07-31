@@ -4,6 +4,14 @@ body{
     margin:10%;
     text-align: "center";
   }
+  .boxy{
+    color: black;
+    background: cyan;
+    padding: 20px;
+  }
+  a{
+    color: hotpink;
+  }
   .video-styling{
     display: grid;
     grid-template-columns: 20% 10% video 10% 20%;
@@ -12,12 +20,14 @@ body{
     margin: 0;
     background-size: cover;
     background-image: linear-gradient(to bottom right, white, grey);
+    
   }
   .content{
     background: none;
   }
   nav{
     top:0;
+    /* color: hotpink; */
     text-align: center;
     background: orangered;
     position: fixed;
@@ -28,7 +38,26 @@ body{
   .shop_item{
     text-align: center;
   }
+  a:link {
+    text-decoration: none;
+  }
   
+  a:visited {
+    text-decoration: none;
+    color: hotpink;
+
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:active {
+    text-decoration: underline;
+  }
+  .links:visited{
+    color: hotpink;
+  }
   img.shop_image{
     vertical-align: center;
     text-align: center;
@@ -40,8 +69,6 @@ body{
   
   .collage{
     text-align: center;
-    
-    
   }
   
   img.collage{
@@ -59,39 +86,13 @@ body{
     text-align: center;
     grid-area: video;
   }
-  /* .video-Wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-  } */
-  
-  /* ul a{
-    color:orangered;
-    text-decoration: none;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    padding: 0px 10px;
-  } */
-  /* .video{
-    display: block;
-    text-align: center;
-    
-  } */
+
   .grid-container{
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 10px;
-    /* grid-template-rows: 25% 25% 25% 25%;
-    grid-template-columns: 10% 10%; */
-    /*grid-template-areas:
-    "header header header header"
-    "sidebar search search search"
-    "sidebar main main ."
-    "footer footer footer footer"
-    */
     color: white;
-  
+
   }
   
   
@@ -129,7 +130,7 @@ body{
   form{
     padding-top: 5%;
   }
-  
+   /*
   form.home-search input[type=text] {
     padding: 10px;
     font-size: 17px;
@@ -169,7 +170,7 @@ body{
   }
   
   
-  /*
+ 
   ====================================================
   h1, h2{
     color: #555;

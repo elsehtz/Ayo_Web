@@ -1,80 +1,42 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<!--
-  Practice site, marketplace, menu bar at top,
-  followed by search bar, into small content section
--->
-<html lang="en" dir="ltr" style="height: 100%" class="background">
-  <head>
-    <title>Ayo's Site</title>
-    <!--
-      <link rel="shortcut icon" href="http://www.brianshim.com/webtricks/wp-content/uploads/2012/11/stars_favicon.png" type="image/x-icon" />
-    -->
-    <link rel="shortcut icon" href="background.png" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static 'css/ayo_css.css' %}">
-    <!--Load icon Lib-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta charset="utf-8">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  </head>
-
-
-  <body class="background">
-    <div class="logo">
-      <form class="home-search">
-        <input type="text" placeholder="Search..." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>        
-        <!-- <input id="search" placeholder="Search..">
-        <button class="butn"><i class="foo-search"></button> -->
-      </form>
+{% block content %}
+    <div class="video-styling">        
+      <div class="video-wrapper">  
+        <iframe class="video" src="http://www.youtube.com/embed/W7qWa52k-nE"
+        width="560" height="315" align="middle" frameborder="0" allowfullscreen>
+      </iframe>
+      </div>
     </div>
-    <nav>
+    <!-- <div>  <object data="http://www.youtube.com/embed/W7qWa52k-nE"
+      width="560" height="315"></object></div> -->
+    <div class="Memiors" style="text-align: center" style="margin-top: 5%">
+      {{long_text}}
+    </div>
+    <div class="collage">
       <ul>
-        <a href="#http://127.0.0.1:5500/web_practice_1.html#">Home</a>
-        <a href="#">Shop</a>
-        <a href="#">Room</a>
-        <a href="#">Contact</a>
-      </ul>
-    </nav>
-    <div class="content" >
-        <div class="video-styling">        
-          <div class="video-wrapper">  
-            <iframe class="video" src="http://www.youtube.com/embed/W7qWa52k-nE"
-            width="560" height="315" align="middle" frameborder="0" allowfullscreen>
-          </iframe>
-          </div>
-        </div>
-        <!-- <div>  <object data="http://www.youtube.com/embed/W7qWa52k-nE"
-          width="560" height="315"></object></div> -->
-        <div class="Memiors" style="text-align: center" style="margin-top: 5%">
-          {{long_text}}
-        </div>
-        <div class="collage">
-          <ul>
-              <img class="collage" src="{% static 'Ekko/project.jpg' %}" title="Kings Thrown"></a>
-              <img class="collage" src="{% static 'Ekko/sandstorm.jpg' %}" title="Kings Thrown"></a>
-              <img class="collage" src="{% static 'Ekko/skt.jpg' %}" title="Kings Thrown"></a>
-            </ul>
-        </div>
-        <div class="shop_item">
-          <ul>
-            <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/coat.jpg' %}" title="Kings Thrown"></a>
-            <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/shoes.jpg' %}" title="Kings Thrown"></a>
-            <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/pants.jpg' %}" title="Kings Thrown"></a>
-          </ul>
-        </div>
-        <div class="shop_item">
-          <div class="shop_image">
-
-          </div>
-          <div class="shop_title">
-
-          </div>
-          <div class="shop_price">
-
-          </div>
-        </div>
-        <footer>c2019 {{dest_1.name}} Testing Site</footer>
+          <img class="collage" src="{% static 'Ekko/project.jpg' %}" title="Kings Thrown"></a>
+          <img class="collage" src="{% static 'Ekko/sandstorm.jpg' %}" title="Kings Thrown"></a>
+          <img class="collage" src="{% static 'Ekko/skt.jpg' %}" title="Kings Thrown"></a>
+        </ul>
     </div>
-  </body>
-</html>
+    <div class="shop_item">
+      <ul>
+        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/coat.jpg' %}" title="Kings Thrown"></a>
+        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/shoes.jpg' %}" title="Kings Thrown"></a>
+        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/pants.jpg' %}" title="Kings Thrown"></a>
+      </ul>
+    </div>
+    <div class="shop_item">
+      <div class="shop_image">
+
+      </div>
+      <div class="shop_title">
+
+      </div>
+      <div class="shop_price">
+
+      </div>
+    </div>
+    <footer>c2019 {{dest_1.name}} Testing Site</footer>
+{% endblock content %}
