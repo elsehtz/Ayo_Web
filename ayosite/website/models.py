@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.conf import settings
 from django.utils import timezone
 
@@ -17,6 +18,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("website:home", args=[])
+        # return reverse("website:product_list_by_category", args=[self.slug])
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
@@ -36,52 +40,26 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("website:product_detail", args=[self.id, self.slug])
 
 
 #=======================================================================
 
-class shop_item(models.Model):
-    app_label = 'website'
-    title = models.CharField(max_length = 100)
-    desc = models.CharField(max_length = 100)
-    #price = models.FloatField()
-    class Meta:
-        app_label = 'website'
-    def __str__(self):
-        return self.title
 
 
-class order_item(models.Model):
-    item = models.ForeignKey(shop_item,on_delete = models.CASCADE)
-    title = models.CharField(max_length = 100)
 
-    def __str__(self):
-        return self.title
-
-
-class order(models.Model):
-    user = models.ForeignK ey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
-    order = models.BooleanField(default = False)
-    items = models.ManyToManyField(order_item)
-    # start_date = models.DateTimeField(auto_now_add=True)
-    # order_date = models.DateTimeField()
+# class CustomUser(models.Model):
+#     title: models.CharField(max_length=100)
     
-    # def __str__(self):
-    #     return self.user.username
+#     def __str__(self):
+#         return self.title
 
-class CustomUser(models.Model):
-    title: models.CharField(max_length=100)
-    
-    def __str__(self):
-        return self.title
+# class Cart(models.Model):
+#     # created_at = models.DateTimeField(auto_now_add = True)
+#     user = models.OneToOneField(CustomUser, blank=True, null=True, on_delete = models.CASCADE, related_name='cart')
+#     session_key = models.CharField(max_length=40)
 
-class Cart(models.Model):
-    # created_at = models.DateTimeField(auto_now_add = True)
-    user = models.OneToOneField(CustomUser, blank=True, null=True, on_delete = models.CASCADE, related_name='cart')
-    session_key = models.CharField(max_length=40)
-
-    class Meta:
-        unique_together = ('user', 'session_key',)
-
-class names(models.Model):
-    name: str
+#     class Meta:
+#         unique_together = ('user', 'session_key',)

@@ -1,24 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import shop_item, names
+from .models import Category, Product
+
+
 # Create your views here.
 def home(request):
-    shirt_ex = shop_item()
-    my_name = names()
-    my_name.name = "Zak E."
-    dynamic_dict = """NOTE**: THIS IS JUST SAMPLE TEXT TO SHOW THAT THIS IS A DYNAMIC 
-                    TEXT SECTION FOR WHATEVER USES YOU MAY HAVE ~ Zak \n\n
-                    "Whatever may come, fast or progressive, forcefully or quietly, abrasive or other. 
-                    Do not waiver, do not weaken, do not fall. Failure may feel like
-                    the heaviest weight, but in reality, nothing is heavier than despair" """
-    
+
     #return render(request, 'web_practice_1.html', dynamic_dict)
-    return render(request, 'web_practice_1.html', {'dest_1':my_name})
+    return render(request, 'web_practice_1.html')
 
 
 def shop(request):
     return render(request, 'checkout-page.html')
-
+    
 
 def room(request):
     return render(request, 'room.html', {'product_list':range(0,5)})
@@ -28,9 +22,44 @@ def signin(request):
     return
 
 
-def contact(request):
-    return render(request, 'home.html')
+def contact(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    products = Product.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products = Product.objects.filter(category=category)
 
+    context = {
+        'category': category,
+        'categories': categories,
+        'products': products
+    }
+    return render(request, 'home.html', context)
+
+
+def product_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    products = Product.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products = Product.objects.filter(category=category)
+
+    context = {
+        'category': category,
+        'categories': categories,
+        'products': products
+    }
+    return render(request, 'shop/product/list.html', context)
+
+
+def product_detail(request, id, slug):
+    product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    context = {
+        'product': product
+    }
+    return render(request, 'shop/product/detail.html', context)
 # Actions
 
 def add(request):
