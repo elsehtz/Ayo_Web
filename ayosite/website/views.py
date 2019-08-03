@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Category, Product
+from django.shortcuts import redirect
+from .models import Category, Product, Order, OrderItem
+from django.utils import timezone
 
 
 # Create your views here.
@@ -43,10 +45,10 @@ def product_list(request, category_slug=None, slug=None):
     return render(request, 'product/list.html', context)
 
 # def product_detail(request, id, slug):
-def product_detail(request, id=None):
+def product_detail(request, slug=None):
     # product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    if id:
-        product = get_object_or_404(Product, id=id, available=True)
+    if slug:
+        product = get_object_or_404(Product, slug=slug, available=True)
         context = {
             'product': product
         }
@@ -57,3 +59,21 @@ def product_detail(request, id=None):
 
 def checkout(request):
     return render(request, "checkout-page.html")
+
+def add_to_cart(request, slug):
+    item = get_object_or_404(Product, slug=slug)
+    order_item = OrderItem.objects.create(item=item)
+    order_set = Order.objects.filter(user=request.user, ordered=False)
+    
+    if order_set.exists():
+        order = order_set[0]
+        #check if order item is in the order
+        if order.item.filter(item__slug=item.slug).exists():
+            order_item.quantity +=1
+            order_item.save()
+    else:
+        ordered_date =  timezone.now()
+        order = Order.objects.create(user=request.user, order_date = ordered_date)
+        order.items.add(order_item)   
+
+    return  redirect("website:product_detail", slug=slug)

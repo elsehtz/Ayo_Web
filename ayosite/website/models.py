@@ -43,7 +43,11 @@ class Product(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse_lazy("website:product_detail", args=[self.id])
+        return reverse("website:product_detail", args=[self.slug])
+
+    def get_add_to_cart_url(self):
+        return reverse("website:add_to_cart", args=[self.slug])
+
 
 class Post(models.Model):
     name = models.CharField(max_length=100, db_index=True)
@@ -61,16 +65,17 @@ class Post(models.Model):
 
 
 class OrderItem(models.Model):
-    title = models.ForeignKey(Product, on_delete=models.CASCADE)
-    
+    item = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
     def __str__(self):
-        return self.title
+        return f'{self.quantity} of {self.item.name}'
 
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    items = models.ManyToManyField(OrderItem)
+    item = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     order_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)

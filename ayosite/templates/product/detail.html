@@ -5,5 +5,13 @@
 {% endblock %}
 
 {% block content %}
-    {{product.image}}
+    <img src="{{ product.image.url }}" alt="..." style="height: 170px; width: auto; margin-top:10px">
+    <h3>{{product.description}}</h3>
+
+    <form action="{{ product.get_add_to_cart_url }}">
+    
+        <button>Add to cart</button>
+    
+    </form>
+
 {% endblock %}
