@@ -1,7 +1,9 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.conf import settings
 from django.utils import timezone
+import random
+
 
 # Create your models here.
 class Category(models.Model):
@@ -19,8 +21,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("website:home", args=[])
-        # return reverse("website:product_list_by_category", args=[self.slug])
+        return reverse("website:product_list_by_category", args=[self.slug])
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
@@ -42,24 +43,39 @@ class Product(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse("website:product_detail", args=[self.id, self.slug])
+        return reverse_lazy("website:product_detail", args=[self.id])
 
+class Post(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=100, db_index=True)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+
+    class Meta:
+        ordering = ('name', )
+        index_together = (('id', 'slug'),)
 
 #=======================================================================
 
 
-
-
-# class CustomUser(models.Model):
-#     title: models.CharField(max_length=100)
+class OrderItem(models.Model):
+    title = models.ForeignKey(Product, on_delete=models.CASCADE)
     
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.title
 
-# class Cart(models.Model):
-#     # created_at = models.DateTimeField(auto_now_add = True)
-#     user = models.OneToOneField(CustomUser, blank=True, null=True, on_delete = models.CASCADE, related_name='cart')
-#     session_key = models.CharField(max_length=40)
 
-#     class Meta:
-#         unique_together = ('user', 'session_key',)
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    items = models.ManyToManyField(OrderItem)
+    start_date = models.DateTimeField(auto_now_add=True)
+    order_date = models.DateTimeField()
+    ordered = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return self.user.username
+

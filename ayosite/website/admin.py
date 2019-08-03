@@ -1,13 +1,10 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Order, OrderItem
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
-
-
-admin.site.register(Category, CategoryAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -17,4 +14,32 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+# class ItemAdmin(admin.ModelAdmin):
+#     list_display = ['name', 'slug']
+
+#     title = models.CharField(max_length=100)
+#     price = models.FloatField()
+
+
+# class OrderItemAdmin(admin.ModelAdmin):
+#     list_display = ['name', 'slug']
+
+#     title = models.ForeignKey(Item, on_delete=models.CASCADE)
+    
+
+# class OrderAdmin(admin.ModelAdmin):
+#     list_display = ['name', 'slug']
+
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                              on_delete=models.CASCADE)
+#     items = models.ManyToManyField(OrderItem)
+#     start_date = models.DateTimeField(auto_now_add=True)
+#     order_date = models.DateTimeField()
+#     ordered = models.BooleanField(default=False)
+
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+# 
+admin.site.register(Order)
+admin.site.register(OrderItem)
+

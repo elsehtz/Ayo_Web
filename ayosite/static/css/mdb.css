@@ -1135,6 +1135,18 @@
 .rgba-black-strong:after {
   background-color: rgba(0, 0, 0, 0.7); }
 
+.orangered{
+  background-color: orangered !important; }
+
+.orangered-text{
+  color: orangered !important; }
+
+.gray{
+  background-color: gray !important; }
+
+.gray-text{
+  color: gray !important; }
+
 .white {
   background-color: #fff !important; }
 
@@ -6703,7 +6715,9 @@ table.table a.btn.btn-black {
 .navbar {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  font-weight: 300; }
+  font-weight: 300;
+  background: orangered;
+ }
   .navbar form .md-form input {
     margin: 0 5px 1px 8px; }
   .navbar .breadcrumb {

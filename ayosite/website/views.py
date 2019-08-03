@@ -11,7 +11,7 @@ def home(request):
 
 
 def shop(request):
-    return render(request, 'checkout-page.html')
+    return render(request, 'shop.html')
     
 
 def room(request):
@@ -22,12 +22,17 @@ def signin(request):
     return
 
 
-def contact(request, category_slug=None):
+def contact(request):
+
+    return render(request, 'home.html')
+
+
+def product_list(request, category_slug=None, slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
+    if slug:
+        category = get_object_or_404(Category, slug=slug)
         products = Product.objects.filter(category=category)
 
     context = {
@@ -35,35 +40,20 @@ def contact(request, category_slug=None):
         'categories': categories,
         'products': products
     }
-    return render(request, 'home.html', context)
+    return render(request, 'product/list.html', context)
+
+# def product_detail(request, id, slug):
+def product_detail(request, id=None):
+    # product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    if id:
+        product = get_object_or_404(Product, id=id, available=True)
+        context = {
+            'product': product
+        }
+    else:
+        context = {'product': 'Error, empty'}
+    return render(request, 'product/detail.html', context)
 
 
-def product_list(request, category_slug=None):
-    category = None
-    categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=category)
-
-    context = {
-        'category': category,
-        'categories': categories,
-        'products': products
-    }
-    return render(request, 'shop/product/list.html', context)
-
-
-def product_detail(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    context = {
-        'product': product
-    }
-    return render(request, 'shop/product/detail.html', context)
-# Actions
-
-def add(request):
-    val_1 = request.POST['num_1']
-    val_2 = request.POST['num_2']
-    res = int(val_1) + int(val_2)
-    return render(request, 'result.html', {'result':res})
+def checkout(request):
+    return render(request, "checkout-page.html")
