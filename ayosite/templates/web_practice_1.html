@@ -1,42 +1,88 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends 'base.html' %}
 {% block content %}
-    <div class="video-styling">        
-      <div class="video-wrapper">  
-        <iframe class="video" src="http://www.youtube.com/embed/W7qWa52k-nE"
-        width="560" height="315" align="middle" frameborder="0" allowfullscreen>
-      </iframe>
-      </div>
-    </div>
-    <!-- <div>  <object data="http://www.youtube.com/embed/W7qWa52k-nE"
-      width="560" height="315"></object></div> -->
-    <div class="Memiors" style="text-align: center" style="margin-top: 5%">
-      {{long_text}}
-    </div>
-    <div class="collage">
-      <ul>
-          <img class="collage" src="{% static 'Ekko/project.jpg' %}" title="Kings Thrown"></a>
-          <img class="collage" src="{% static 'Ekko/sandstorm.jpg' %}" title="Kings Thrown"></a>
-          <img class="collage" src="{% static 'Ekko/skt.jpg' %}" title="Kings Thrown"></a>
-        </ul>
-    </div>
-    <div class="shop_item">
-      <ul>
-        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/coat.jpg' %}" title="Kings Thrown"></a>
-        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/shoes.jpg' %}" title="Kings Thrown"></a>
-        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/pants.jpg' %}" title="Kings Thrown"></a>
-      </ul>
-    </div>
-    <div class="shop_item">
-      <div class="shop_image">
+{% load static %}
 
-      </div>
-      <div class="shop_title">
 
-      </div>
-      <div class="shop_price">
+<h1>Hello {{name}}</h1>
 
-      </div>
-    </div>
-    <footer>c2019 {{dest_1.name}} Testing Site</footer>
-{% endblock content %}
+<!-- 
+form action = "<function name from views>"
+input type=submit, requests the function from views with
+the name provided from action in the form field
+-->
+<form action = "add" method = 'post'>
+
+<!-- 
+For post requests, you must have a csrf_token 
+sent for security verification (the one Django provides)
+-->  
+{% csrf_token %}
+
+  enter 1st number: <input type="text" name="num_1" ><br>
+  enter 1st number: <input type="text" name="num_2" ><br>
+  <input type="submit">
+ 
+</form>
+
+<!-- <div>
+  {% if not context %}
+    Shit, nothin
+  {% else %}  
+    <title>{{ context.categories|length }}</title>
+    <title>{{ context.products.0.name }}</title>
+  {% endif %}
+</div> -->
+
+{% block title %}
+
+{% if category %}{{ category.name }} {% else %} Products {% endif %}
+{% endblock %}
+
+   <div class="container-fluid">
+      <div class="row" style="margin-top: 6%">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+              <div class="row">
+                  {% for product in products %}
+                      <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="{{ product.get_absolute_url }}">
+                                <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'Ekko/project.jpg' %} {% endif %}" alt="..." style="height: 130px; width: auto">
+                            </a>
+                            <div class="caption">
+                                <h3 class="text-center">
+                                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                </h3>
+                                <p class="text-center">Kshs. {{ product.price }}</p>
+                            </div>
+                        </div>
+                      </div>
+                  {% endfor %}
+              </div>
+
+
+          </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module">
+            <ol class="list-unstyled">
+              <li {% if not category %} class="active"{% endif %}><a href="{% url 'website:product_list' %}">All</a></li>
+            {% for c in categories %}
+
+              <li {% if category.slug == c.slug %} class="active"{% endif %}>
+                  <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+              </li>
+            {% endfor %}
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+{% endblock %}

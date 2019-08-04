@@ -47,7 +47,9 @@ class Product(models.Model):
 
     def get_add_to_cart_url(self):
         return reverse("website:add_to_cart", args=[self.slug])
-
+    
+    def get_remove_from_cart_url(selg):
+        return reverse("website:remove_from_cart", args=[self.slug])
 
 class Post(models.Model):
     name = models.CharField(max_length=100, db_index=True)
@@ -67,6 +69,10 @@ class Post(models.Model):
 class OrderItem(models.Model):
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
+
 
     def __str__(self):
         return f'{self.quantity} of {self.item.name}'

@@ -1,88 +1,91 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends "base.html" %}
 {% load static %}
+{% block content %}
 
+  <!--Carousel Wrapper-->
+  <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
 
-<h1>Hello {{name}}</h1>
-
-<!-- 
-form action = "<function name from views>"
-input type=submit, requests the function from views with
-the name provided from action in the form field
--->
-<form action = "add" method = 'post'>
-
-<!-- 
-For post requests, you must have a csrf_token 
-sent for security verification (the one Django provides)
--->  
-{% csrf_token %}
-
-  enter 1st number: <input type="text" name="num_1" ><br>
-  enter 1st number: <input type="text" name="num_2" ><br>
-  <input type="submit">
- 
-</form>
-
-<!-- <div>
-  {% if not context %}
-    Shit, nothin
-  {% else %}  
-    <title>{{ context.categories|length }}</title>
-    <title>{{ context.products.0.name }}</title>
-  {% endif %}
-</div> -->
-
-{% block title %}
-
-{% if category %}{{ category.name }} {% else %} Products {% endif %}
-{% endblock %}
-
-   <div class="container-fluid">
-      <div class="row" style="margin-top: 6%">
-
-        <div class="col-sm-8 blog-main">
-
-          <div class="blog-post">
-              <div class="row">
-                  {% for product in products %}
-                      <div class="col-md-4">
-                        <div class="thumbnail">
-                            <a href="{{ product.get_absolute_url }}">
-                                <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'Ekko/project.jpg' %} {% endif %}" alt="..." style="height: 130px; width: auto">
-                            </a>
-                            <div class="caption">
-                                <h3 class="text-center">
-                                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                                </h3>
-                                <p class="text-center">Kshs. {{ product.price }}</p>
-                            </div>
-                        </div>
-                      </div>
-                  {% endfor %}
+      <!--Slides-->
+      <div class="carousel-inner" role="listbox">
+  
+        <!--First slide-->
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('static/Ekko/sandstorm.jpg'); background-repeat: no-repeat; background-size: cover;">
+  
+            <!-- Mask & flexbox options-->
+            <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+  
+              <!-- Content -->
+              <div class="text-center white-text mx-5 wow fadeIn">
+                <h1 class="mb-4">
+                  <strong>Ayo can say a motto here</strong>
+                </h1>
+  
+                <p>
+                  <strong>Friends, this is the beginning</strong>
+                </p>
+  
+                <p class="mb-4 d-none d-md-block">
+                  <strong>The circumstances of one's birth are irrelivant. It is what one does with the
+                      their life that determines it's worth.
+                  </strong>
+                </p>
+  
+                <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg"> 
+                  <!-- <i class="fas fa-video"></i> -->
+                  <i class="fas fa-play"></i>
+                  Watch now
+                </a>
               </div>
-
-
-          </div><!-- /.blog-post -->
-
-        </div><!-- /.blog-main -->
-
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module">
-            <ol class="list-unstyled">
-              <li {% if not category %} class="active"{% endif %}><a href="{% url 'website:product_list' %}">All</a></li>
-            {% for c in categories %}
-
-              <li {% if category.slug == c.slug %} class="active"{% endif %}>
-                  <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-              </li>
-            {% endfor %}
-            </ol>
+              <!-- Content -->
+  
+            </div>
+            <!-- Mask & flexbox options-->
+  
           </div>
-        </div><!-- /.blog-sidebar -->
+        </div>
+        <!--/First slide-->
+  
+      </div>
+      <!--/.Slides-->
+  </div>
 
-      </div><!-- /.row -->
+    <div class="video-styling">        
+      <div class="video-wrapper">  
+        <iframe class="video" src="http://www.youtube.com/embed/W7qWa52k-nE"
+        width="560" height="315" align="middle" frameborder="0" allowfullscreen>
+      </iframe>
+      </div>
+    </div>
+    <!-- <div>  <object data="http://www.youtube.com/embed/W7qWa52k-nE"
+      width="560" height="315"></object></div> -->
+    <div class="Memiors" style="text-align: center" style="margin-top: 5%">
+      {{long_text}}
+    </div>
+    <div class="collage">
+      <ul>
+          <img class="collage" src="{% static 'Ekko/project.jpg' %}" title="Kings Thrown"></a>
+          <img class="collage" src="{% static 'Ekko/sandstorm.jpg' %}" title="Kings Thrown"></a>
+          <img class="collage" src="{% static 'Ekko/skt.jpg' %}" title="Kings Thrown"></a>
+        </ul>
+    </div>
+    <div class="shop_item">
+      <ul>
+        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/coat.jpg' %}" title="Kings Thrown"></a>
+        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/shoes.jpg' %}" title="Kings Thrown"></a>
+        <a href="https://www.google.com"><img class="shop_image" src="{% static 'stock_photos/pants.jpg' %}" title="Kings Thrown"></a>
+      </ul>
+    </div>
+    <div class="shop_item">
+      <div class="shop_image">
 
-    </div><!-- /.container -->
+      </div>
+      <div class="shop_title">
 
-{% endblock %}
+      </div>
+      <div class="shop_price">
+
+      </div>
+    </div>
+    <footer>c2019 {{dest_1.name}} Testing Site</footer>
+{% endblock content %}
