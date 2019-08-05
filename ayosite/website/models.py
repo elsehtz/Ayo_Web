@@ -5,7 +5,11 @@ from django.utils import timezone
 import random
 
 
-# Create your models here.
+# Create a user model that is initalized only with session ID
+# username, email, First and Last Name, location, etc can be made 
+# through a sign in or checkout that will save that as a user account
+
+
 class Category(models.Model):
     name = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, unique=True ,db_index=True)
@@ -21,7 +25,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("website:product_list_by_category", args=[self.slug])
+        return reverse("website:merchandise_by_category", args=[self.slug])
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)

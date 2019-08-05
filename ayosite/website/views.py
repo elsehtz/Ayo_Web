@@ -32,6 +32,16 @@ def shop(request, category_slug=None, slug=None):
 def room(request):
     return render(request, 'room.html', {'product_list':range(0,5)})
 
+def order_sum(request):
+    user_order = OrderItem.objects.filter(user=request.user)
+    if not user_order:
+        user_order = f'You have no items in your cart'
+        
+    return render(request, "order-summary.html", {'order_items':user_order})
+
+def checkout(request):
+    return render(request, "checkout-page.html")
+
 
 def signin(request):
     return
@@ -56,9 +66,7 @@ def product_list(request, category_slug=None, slug=None):
     }
     return render(request, 'product/list.html', context)
 
-# def product_detail(request, id, slug):
 def product_detail(request, slug=None):
-    # product = get_object_or_404(Product, id=id, slug=slug, available=True)
     if slug:
         product = get_object_or_404(Product, slug=slug, available=True)
         context = {
@@ -68,9 +76,6 @@ def product_detail(request, slug=None):
         context = {'product': 'Error, empty'}
     return render(request, 'product/detail.html', context)
 
-
-def checkout(request):
-    return render(request, "checkout-page.html")
 
 def add_to_cart(request, slug):
     item = get_object_or_404(Product, slug=slug)
@@ -93,7 +98,7 @@ def add_to_cart(request, slug):
     else:
         ordered_date =  timezone.now()
         order = Order.objects.create(user=request.user, order_date = ordered_date)
-        order.items.add(order_item)   
+        order.item.add(order_item)   
         messages.info(request, "Item added to cart")
 
     return  redirect("website:product_detail", slug=slug)

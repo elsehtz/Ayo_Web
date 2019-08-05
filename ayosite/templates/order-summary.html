@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Cart Summary: </h1>
+    {% for order_item in order_items %}
+        <li>{{ order_item }}</li>
+        <img src="{{ order_item.item.image.url }}" style="width: 400px; height: auto;">
+
+    {% endfor %}
+    <!-- Item Title/Name | quantity | item price | total item price (w/ quantity) -->
+    <!-- Continue shopping button | proceed to checkout button -->
+    <form action="{% url 'website:checkout' %}">
+            <button>Proceed to Checkout</button>
+    </form>
+</div>
+{% endblock %}
