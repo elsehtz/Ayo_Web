@@ -14,6 +14,15 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Product, ProductAdmin)
+# 
+# admin.site.register(User)
+admin.site.register(Order)
+admin.site.register(OrderItem)
+
 # class ItemAdmin(admin.ModelAdmin):
 #     list_display = ['name', 'slug']
 
@@ -36,10 +45,3 @@ class ProductAdmin(admin.ModelAdmin):
 #     start_date = models.DateTimeField(auto_now_add=True)
 #     order_date = models.DateTimeField()
 #     ordered = models.BooleanField(default=False)
-
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Product, ProductAdmin)
-# 
-admin.site.register(Order)
-admin.site.register(OrderItem)
-

@@ -1,0 +1,4 @@
+TODO:
+-Format Shipping address
+-Transition that into Billing
+-Deal with payment method
