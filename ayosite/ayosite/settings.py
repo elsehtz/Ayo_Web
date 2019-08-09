@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', 
 
+    'bootstrap4',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -88,11 +89,11 @@ WSGI_APPLICATION = 'ayosite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'demo',
-        'USER' : 'postgres',
-        'PASSWORD' : 'EkkoSwain7', 
-        'HOST' : 'Localhost',
-        'PORT' : '5432'
+        'NAME': 'opjblgnx',
+        'USER' : 'opjblgnx',
+        'PASSWORD' : 'p5Znk7jtaWI-XfuQQgZcXvCXrZONsDLe', 
+        'HOST' : 'raja.db.elephantsql.com',
+        'PORT' : ''
         
     }
 }
