@@ -30,10 +30,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'website.apps.WebsiteConfig',
+    'django.contrib.contenttypes',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 
@@ -45,8 +44,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_countries',
     'crispy_forms',
-
     'tinymce',
+    'stripe',
+
+
+    'website',
+
 ]
 
 SITE_ID = 1
@@ -153,3 +156,6 @@ AUTHENTICATION_BACKENDS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'products/')
 
+# Stripe Keys here
+STRIPE_SECRET_KEY = '<your test secret key here>'
+STRIPE_PUBLISHABLE_KEY = '<your test publishable key here>'

@@ -2,10 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import redirect
-from .models import Category, Product, Order, OrderItem, BillingAddress
+from .models import Category, Product, Order, OrderItem, Address, UserProfile
 from django.utils import timezone
 from django.views import View
-from .forms import CheckoutForm
+from .forms import CheckoutForm, PaymentForm
 from django.core.exceptions import ObjectDoesNotExist
 
 import random
@@ -64,9 +64,7 @@ class CheckoutView(View):
             form = CheckoutForm()
             context = {
                 'form': form,
-                'couponform': CouponForm(),
                 'order': order,
-                'DISPLAY_COUPON_FORM': True
             }
 
             shipping_address_qs = Address.objects.filter(
@@ -87,10 +85,10 @@ class CheckoutView(View):
                 context.update(
                     {'default_billing_address': billing_address_qs[0]})
 
-            return render(self.request, "checkout.html", context)
+            return render(self.request, "checkout-mailing.html", context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
-            return redirect("core:checkout")
+            return redirect("website:checkout")
 
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
@@ -114,7 +112,7 @@ class CheckoutView(View):
                     else:
                         messages.info(
                             self.request, "No default shipping address available")
-                        return redirect('core:checkout')
+                        return redirect('website:checkout')
                 else:
                     print("User is entering a new shipping address")
                     shipping_address1 = form.cleaned_data.get(
@@ -177,7 +175,7 @@ class CheckoutView(View):
                     else:
                         messages.info(
                             self.request, "No default billing address available")
-                        return redirect('core:checkout')
+                        return redirect('website:checkout')
                 else:
                     print("User is entering a new billing address")
                     billing_address1 = form.cleaned_data.get(
@@ -215,16 +213,16 @@ class CheckoutView(View):
                 payment_option = form.cleaned_data.get('payment_option')
 
                 if payment_option == 'S':
-                    return redirect('core:payment', payment_option='stripe')
+                    return redirect('website:checkout', payment_option='stripe')
                 elif payment_option == 'P':
-                    return redirect('core:payment', payment_option='paypal')
+                    return redirect('website:checkout', payment_option='paypal')
                 else:
                     messages.warning(
                         self.request, "Invalid payment option selected")
-                    return redirect('core:checkout')
+                    return redirect('website:checkout')
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
-            return redirect("core:order-summary")
+            return redirect("website:order_summary")
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
@@ -232,7 +230,6 @@ class PaymentView(View):
         if order.billing_address:
             context = {
                 'order': order,
-                'DISPLAY_COUPON_FORM': False
             }
             userprofile = self.request.user.userprofile
             if userprofile.one_click_purchasing:
@@ -252,7 +249,7 @@ class PaymentView(View):
         else:
             messages.warning(
                 self.request, "You have not added a billing address")
-            return redirect("core:checkout")
+            return redirect("website:checkout")
 
     def post(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
